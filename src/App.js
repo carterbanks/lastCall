@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import Birthdate from "./Components/Pages/Signup/Birthdate";
+// import Birthdate from "./Components/Pages/Signup/Birthdate";
 import Home from "./Components/Pages/Home/";
-import FirstImpression from "./Components/Pages/JoinTheParty/FirstImpression";
-import GroupSnap from "./Components/Pages/JoinTheParty/GroupSnap";
+// import FirstImpression from "./Components/Pages/JoinTheParty/FirstImpression";
+// import GroupSnap from "./Components/Pages/JoinTheParty/GroupSnap";
 import Login from "./Components/Pages/Login";
 import Logout from "./Components/Pages/Logout";
 import Signup from "./Components/Pages/Signup";
@@ -16,12 +16,11 @@ export default () => (
   <BrowserRouter>
     <div>
     <Wrapper>
-    <Sidebar/>
+    <Navigation/>
     <Route exact path="/" component= {Home} />
-    <Route path = "/about" component = {About} />
-    <Route path = "/projects" component = {Projects} />
-    <Route path = "/contact" component = {Contact} />
-    <NavTabs />
+    <Route path = "/login" component = {Login} />
+    <Route path = "/logout" component = {Logout} />
+    <Route path = "/signup" component = {Signup} />
     </Wrapper>
 
     </div>
