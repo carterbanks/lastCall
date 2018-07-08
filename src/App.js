@@ -15,8 +15,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 export default () => (
   <BrowserRouter>
     <div>
-    <Wrapper>
     <Navigation/>
+    <Wrapper>
     <Route exact path="/" component= {Home} />
     <Route path = "/login" component = {Login} />
     <Route path = "/logout" component = {Logout} />
