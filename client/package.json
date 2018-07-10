@@ -2,7 +2,6 @@
   "name": "lastcall",
   "version": "0.1.0",
   "private": true,
-  "main": "server.js",
   "dependencies": {
     "body-parser": "^1.18.3",
     "concurrently": "^3.6.0",
@@ -15,11 +14,11 @@
     "react-scripts": "1.1.4"
   },
   "scripts": {
-    "client-install": "npm install --prefix client",
-    "start": "node server.js",
-    "server": "nodemon server.js",
-    "client": "cd client && yarn start",
-    "dev": "concurrently \"yarn run server\" \"yarn run client\""
-  }
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:3001"
 }
 
