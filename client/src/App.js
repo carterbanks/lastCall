@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 // import Birthdate from "./Components/Pages/Signup/Birthdate";
-import Home from "./Components/Pages/Home/";
+import Home from "./components/Pages/Home/";
 // import FirstImpression from "./Components/Pages/JoinTheParty/FirstImpression";
 // import GroupSnap from "./Components/Pages/JoinTheParty/GroupSnap";
-import Login from "./Components/Pages/Login";
-import Logout from "./Components/Pages/Logout";
-import Signup from "./Components/Pages/Signup";
-import Navigation from "./Components/Navigation";
-import Wrapper from "./Components/Wrapper";
+import Login from "./components/Pages/Login";
+import Logout from "./components/Pages/Logout";
+import Signup from "./components/Pages/Signup";
+import Navigation from "./components/Navigation";
+import Wrapper from "./components/Wrapper";
 import { BrowserRouter, Route } from 'react-router-dom';
 
 
@@ -22,7 +22,6 @@ export default () => (
     <Route path = "/logout" component = {Logout} />
     <Route path = "/signup" component = {Signup} />
     </Wrapper>
-
     </div>
   </BrowserRouter>
 )
