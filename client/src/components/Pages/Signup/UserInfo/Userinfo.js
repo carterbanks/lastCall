@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Userinfo.css';
+import API from '../../../../utils/API';
 
 export class Userinfo extends Component {
   render() {

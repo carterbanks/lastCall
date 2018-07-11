@@ -55,4 +55,4 @@ const HostSchema = new Schema({
 
 });
 
-module.exports = Host = mongoose.model('host', HostSchema);
+module.exports = Host = mongoose.model('hosts', HostSchema);
