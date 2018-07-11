@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 // import Birthdate from "./Components/Pages/Signup/Birthdate";
 import Home from "./components/Pages/Home/";
-// import FirstImpression from "./Components/Pages/JoinTheParty/FirstImpression";
+import FirstImpression from "./components/Pages/JoinTheParty/FirstImpression/FirstImpression";
 // import GroupSnap from "./Components/Pages/JoinTheParty/GroupSnap";
 import Login from "./components/Pages/Login";
 import Logout from "./components/Pages/Logout";
@@ -21,6 +21,7 @@ export default () => (
     <Route path = "/login" component = {Login} />
     <Route path = "/logout" component = {Logout} />
     <Route path = "/signup" component = {Signup} />
+    <Route path = "/camera" component= {FirstImpression} />
     </Wrapper>
     </div>
   </BrowserRouter>
