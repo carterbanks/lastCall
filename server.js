@@ -2,7 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-const users = require('./routes/api/users.js');
+const users = require('./routes/api/users');
+const guests = require('./routes/api/guests');
+const hosts = require('./routes/api/hosts');
 
 const app = express();
 
@@ -20,6 +22,8 @@ mongoose
 
 //Use routes
 app.use('/api/users', users);
+app.use('/api/parties/host', hosts);
+app.use('/api/parties/guests', guests);
 
 const port = process.env.PORT || 3001;
 
