@@ -25,13 +25,14 @@ router.post('/', (req, res) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     location: req.body.location,
+    birthdate: req.body.birthdate,
     email: req.body.email,
     phoneNumber: req.body.phoneNumber,
     userName: req.body.userName,
     password: req.body.password
   });
 
-  newUser.save().then(user => res.json(user));
+  newUser.save().then(user => res.json(user)).catch(err => console.log(err));
 });
 
 // route DELETE request to api/user/:id

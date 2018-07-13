@@ -1,14 +1,112 @@
 import React, { Component } from 'react';
 import './Userinfo.css';
 import API from '../../../../utils/API';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import Location from 'react-place';
+
+import 'react-datepicker/dist/react-datepicker.css';
+
+
 
 export class Userinfo extends Component {
-  render() {
-    return (
-      <div className="container userinfo">
-        <input type="text" aria-label="First name" placeholder="First name" />
-        <input type="text" aria-label="Last name" placeholder="Last name" />
-        <select className="custom-select col-md-3" id="user-month">
+  constructor(props) {
+    super(props)
+    this.state = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      birthdate: moment(),
+      phoneNumber: "",
+      location: "",
+      userName: "",
+      password: ""
+    };
+    this.handleDateChange = this.handleDateChange.bind(this);
+  }
+
+  // state = {
+  //   firstName: "",
+  //   lastName: "",
+  //   email: "",
+  //   birthdate: moment(),
+  //   phoneNumber: "",
+  //   location: "",
+  //   userName: "",
+  //   password: ""
+  // };
+
+  // this.handleDateChange = this.handleDateChange.bind(this);
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    // && this.state.lastName && this.state.email && this.state.phoneNumber && this.state.location && this.state.userName && this.state.password
+    if (this.state.firstName) {
+      API.saveUser({
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        birthdate: this.state.birthdate,
+        phoneNumber: this.state.email,
+        location: this.state.location,
+        userName: this.state.userName,
+        password: this.state.password
+      })
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    }
+  };
+
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  handleDateChange(date) {
+    this.setState({
+      birthdate: date
+    });
+  };
+
+
+ onLocationSet(data){
+  // data.description
+  // data.coords.lat
+  // data.coords.lng
+};
+
+render() {
+  return (
+    <div className="container userinfo">
+      <input type="text" aria-label="First name" placeholder="First name" onChange={this.handleInputChange} value={this.state.firstName} name="firstName" />
+      <input type="text" aria-label="Last name" placeholder="Last name" onChange={this.handleInputChange} value={this.state.lastName} name="lastName" />
+      <DatePicker
+        onChange={this.handleDateChange}
+        selected={this.state.birthdate}
+        name="birthdate"
+      />
+      <input type="text" aria-label="phone number" placeholder="Phone number" onChange={this.handleInputChange} value={this.state.phoneNumber} name="phoneNumber" />
+      <input type="text" aria-label="email address" placeholder="Email" onChange={this.handleInputChange} value={this.state.email} name="email" />
+      <Location
+        country='US'
+        noMatching='Sorry, I can not find {{value}}.'
+        onLocationSet={this.onLocationSet}
+        name= "location"
+        value = {this.state.location}
+        inputProps={{
+          style: { color: '#0099FF' },
+          className: 'location',
+          placeholder: 'Where are you?'
+        }}
+      />
+            <input type="text" aria-label="username" placeholder="Username" onChange={this.handleInputChange} value={this.state.userName} name="userName" />
+            <input type="text" aria-label="password" placeholder="Password" onChange={this.handleInputChange} value={this.state.password} name="password" />
+            <input className="btn btn-primary float-right" type="submit" value="Submit" 
+            onClick={this.handleFormSubmit} />
+{/* disabled={!(this.state.firstName && this.state.lastName && this.state.email && this.state.phoneNumber && this.state.birthdate && this.state.location && this.state.userName && this.state.password)} */}
+      {/* <select className="custom-select col-md-3" id="user-month" onChange={this.handleInputChange}>
           <option selected>12</option>
           <option value="11">11</option>
           <option value="10">10</option>
@@ -23,7 +121,7 @@ export class Userinfo extends Component {
           <option value="1">1</option>
         </select>
 
-        <select className="custom-select col-md-3" id="user-day">
+        <select className="custom-select col-md-3" id="user-day" onChange={this.handleInputChange}>
           <option value="31">31</option>
           <option selected>30</option>
           <option value="29">29</option>
@@ -56,7 +154,7 @@ export class Userinfo extends Component {
           <option value="2">2</option>
           <option value="1">1</option>
         </select>
-        <select className="custom-select col-md-3" id="user-year">
+        <select className="custom-select col-md-3" id="user-year" onChange={this.handleInputChange}>
           <option value="1998">1998</option>
           <option value="1997">1997</option>
           <option value="1996">1996</option>
@@ -151,11 +249,11 @@ export class Userinfo extends Component {
           <option value="1907">1907</option>
           <option value="1906">1906</option>
           <option value="1905">1905</option>
-        </select>
-      </div>
+        </select> */}
+    </div>
 
-    )
-  }
+  )
+}
 }
 
 export default Userinfo

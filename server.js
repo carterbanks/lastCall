@@ -16,7 +16,7 @@ const db = require('./config/keys').mongoURI;
 
 //Connect to Mongo
 mongoose
-  .connect(db)
+  .connect(db, { useNewUrlParser: true })
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
@@ -25,6 +25,6 @@ app.use('/api/users', users);
 app.use('/api/parties/host', hosts);
 app.use('/api/parties/guests', guests);
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3002;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));

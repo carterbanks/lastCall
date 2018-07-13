@@ -41,7 +41,7 @@ const GuestSchema = new Schema({
     default: false
   },
   description: {
-    type: Text,
+    type: String,
     required: true
   }
 
