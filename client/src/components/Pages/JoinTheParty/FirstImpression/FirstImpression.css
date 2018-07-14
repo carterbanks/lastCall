@@ -1,0 +1,22 @@
+.video {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+video {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+img {
+  max-width: 100%;
+  height: auto;
+}
+.output{
+    visibility: hidden;
+}
+body{
+    background-color: black;
+}

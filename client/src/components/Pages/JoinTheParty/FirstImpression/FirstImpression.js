@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import "./FirstImpression.css";
+import "./FirstImpressionPicture";
 
 export class FirstImpression extends Component {
   render() {
@@ -6,15 +8,16 @@ export class FirstImpression extends Component {
       <div>
         <div className="contentarea">
           <div className="camera">
-            <video id="video">Video stream not available.</video>
+            <video width={ window.innerWidth} height={window.innerHeight} id="video">Video stream not available.</video>
             <button id="startbutton">Take photo</button>
           </div>
-          <canvas id="canvas" />
-          <div className="output">
-            <img id="photo" alt="The screen capture will appear in this box." />
-          </div>
         </div>
-      </div>
+        <div className="output">
+        <canvas id="canvas" />
+          <img id="photo" alt="The screen capture will appear in this box." />
+        </div>
+        </div>
+      
     );
   }
 
@@ -25,7 +28,7 @@ export class FirstImpression extends Component {
       // calculated based on the aspect ratio of the input stream.
 
       var width; // We will scale the photo width to this
-      var height; // This will be computed based on the input stream
+      var height = 720; // This will be computed based on the input stream
 
       // |streaming| indicates whether or not we're currently streaming
       // video from the camera. Obviously, we start at false.
@@ -81,7 +84,8 @@ export class FirstImpression extends Component {
               // the video, so we will make assumptions if this happens.
 
               if (isNaN(height)) {
-                height = width / (4 / 3);
+                height = video.height;
+                width = video.width;
               }
 
               video.setAttribute("width", width);
@@ -127,15 +131,21 @@ export class FirstImpression extends Component {
       function takepicture() {
         var context = canvas.getContext("2d");
         if (width && height) {
-          canvas.width = width;
-          canvas.height = height;
+          canvas.width = video.width;
+          canvas.height = video.height;
           context.drawImage(video, 0, 0, width, height);
 
           var data = canvas.toDataURL("image/png");
           photo.setAttribute("src", data);
+          console.log(canvas);
+          console.log(photo);
         } else {
           clearphoto();
         }
+      }
+
+      function setImpression() {
+        var profile = photo;
       }
 
       // Set up our event listener to run the startup process
