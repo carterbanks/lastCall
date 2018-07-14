@@ -22,7 +22,7 @@ mongoose
 
 //Use routes
 app.use('/api/users', users);
-app.use('/api/parties/host', hosts);
+app.use('/api/parties/hosts', hosts);
 app.use('/api/parties/guests', guests);
 
 const port = process.env.PORT || 3002;
