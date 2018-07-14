@@ -13,7 +13,7 @@ export class Guest extends Component {
       hasFood: false,
       hasMoney: false,
       hasDD: false,
-      descrption: "This user did not add a description. Accept request at your own risk."
+      description: "This user did not add a description. Accept request at your own risk."
     };
     this.handleDateChange = this.handleDateChange.bind(this);
   }
@@ -32,7 +32,7 @@ export class Guest extends Component {
         hasFood: this.state.hasFood,
         hasMoney: this.state.hasMoney,
         hasDD: this.state.hasDD,
-        description: this.state.descrption
+        description: this.state.description
       })
         .then(res => console.log(res))
         .catch(err => console.log(err));
@@ -52,7 +52,7 @@ export class Guest extends Component {
     // data.coords.lng
   };
 
-  
+
   render() {
     return (
       <div>

@@ -15,7 +15,7 @@ export class Host extends Component {
       hasFood: false,
       hasMoney: false,
       hasDD: false,
-      descrption: "This user did not add a description. Request an invitation at your own risk."
+      description: "This user did not add a description. Request an invitation at your own risk."
     };
     this.handleDateChange = this.handleDateChange.bind(this);
   }
@@ -36,7 +36,7 @@ export class Host extends Component {
         hasFood: this.state.hasFood,
         hasMoney: this.state.hasMoney,
         hasDD: this.state.hasDD,
-        description: this.state.descrption
+        description: this.state.description
       })
         .then(res => console.log(res))
         .catch(err => console.log(err));
