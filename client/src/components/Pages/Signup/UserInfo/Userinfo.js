@@ -19,7 +19,6 @@ export class Userinfo extends Component {
       birthdate: moment(),
       phoneNumber: "",
       location: "",
-      userName: "",
       password: ""
     };
     this.handleDateChange = this.handleDateChange.bind(this);
@@ -49,7 +48,6 @@ export class Userinfo extends Component {
         birthdate: this.state.birthdate,
         phoneNumber: this.state.email,
         location: this.state.location,
-        userName: this.state.userName,
         password: this.state.password
       })
         .then(res => console.log(res))
@@ -88,7 +86,6 @@ render() {
         name="birthdate"
       />
       <input type="text" aria-label="phone number" placeholder="Phone number" onChange={this.handleInputChange} value={this.state.phoneNumber} name="phoneNumber" />
-      <input type="text" aria-label="email address" placeholder="Email" onChange={this.handleInputChange} value={this.state.email} name="email" />
       <Location
         country='US'
         noMatching='Sorry, I can not find {{value}}.'
@@ -101,7 +98,7 @@ render() {
           placeholder: 'Where are you?'
         }}
       />
-            <input type="text" aria-label="username" placeholder="Username" onChange={this.handleInputChange} value={this.state.userName} name="userName" />
+            <input type="text" aria-label="email address" placeholder="Email" onChange={this.handleInputChange} value={this.state.email} name="email" />
             <input type="text" aria-label="password" placeholder="Password" onChange={this.handleInputChange} value={this.state.password} name="password" />
             <input className="btn btn-primary float-right" type="submit" value="Submit" disabled={!(this.state.firstName && this.state.lastName && this.state.email && this.state.birthdate && this.state.userName && this.state.password)}
             onClick={this.handleFormSubmit} />

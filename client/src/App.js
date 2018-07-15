@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import './App.css';
 // import Birthdate from "./Components/Pages/Signup/Birthdate";
 import Home from "./components/Pages/Home/";
-import FirstImpression from "./components/Pages/JoinTheParty/FirstImpression/FirstImpression";
 // import GroupSnap from "./Components/Pages/JoinTheParty/GroupSnap";
 import Login from "./components/Pages/Login";
 import Logout from "./components/Pages/Logout";

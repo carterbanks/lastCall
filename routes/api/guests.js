@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   const newGuest = new Guest({
     location: req.body.location,
-    distanceView: req.body.distanceView,
+    distanceTravel: req.body.distanceTravel,
     ageMin: req.body.ageMin,
     ageMax: req.body.ageMax,
     smoking: req.body.smoking,
