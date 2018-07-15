@@ -1,0 +1,68 @@
+
+.container-flex {
+    display: flex;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+.phone-screen {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    /* width: 50%; */
+    width: 382px;
+    min-height: 800px;
+    background: #4d4c4c;
+    }
+    
+    .disclaimer {
+        color: #d5d9df;
+        font-family: 'Proxima Nova Soft';
+        text-align: center;
+    }
+    
+    .lcNav {
+    background: #cd4559;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -63px;
+    width: 382px;
+    height: 75px;
+    }
+    
+    .title-font {
+        color: #FFFFFF;
+        font-family: 'Proxima Nova Soft';
+        text-align: center;
+    }
+
+    .space {
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0;
+        margin-bottom: 0;
+        width: auto;
+        height: 20px;
+    }
+
+    .lcLogo {
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        width: 200px;
+        height: 100%;
+    }
+
+    .btn-primary {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 75%;
+        border-color: #cd4559;
+        background: #cd4559;
+        font-family: 'Proxima Nova Soft'; 
+
+    }
