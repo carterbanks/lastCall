@@ -28,7 +28,6 @@ router.post('/', (req, res) => {
     birthdate: req.body.birthdate,
     email: req.body.email,
     phoneNumber: req.body.phoneNumber,
-    userName: req.body.userName,
     password: req.body.password
   });
 
