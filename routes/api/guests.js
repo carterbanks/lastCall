@@ -4,8 +4,8 @@ const router = express.Router();
 // User Model
 const Guest = require('../../models/Guest');
 
-// route get request to api/user
-// desc get all users
+// route get request to api/guest
+// desc get all guests
 // access public
 
 router.get('/', (req, res) => {
@@ -14,8 +14,8 @@ router.get('/', (req, res) => {
     .then(guests => res.json(guests));
 });
 
-// route post request to api/user
-// desc create a user
+// route post request to api/guest
+// desc create a guest
 // access public
 
 router.post('/', (req, res) => {
@@ -35,8 +35,8 @@ router.post('/', (req, res) => {
   newGuest.save().then(guest => res.json(guest));
 });
 
-// route DELETE request to api/user/:id
-// desc Delete a user
+// route DELETE request to api/guest/:id
+// desc Delete a guest
 // access public
 
 router.delete('/:id', (req, res) => {

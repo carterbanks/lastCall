@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 export class Host extends Component {
   constructor(props) {
@@ -23,8 +23,8 @@ export class Host extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     // && this.state.lastName && this.state.email && this.state.phoneNumber && this.state.location && this.state.userName && this.state.password
-    if (this.state.location && this.state.distanceTravel && this.state.ageMinb && this.state.ageMax && this.state.description) {
-      API.saveGuest({
+    if (this.state.location && this.state.distanceTravel && this.state.ageMin && this.state.ageMax && this.state.description) {
+      API.saveHost({
         location: this.state.location,
         distanceTravel: this.state.distanceTravel,
         ageMin: this.state.ageMin,

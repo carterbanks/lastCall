@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 export class Guest extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ export class Guest extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     // && this.state.lastName && this.state.email && this.state.phoneNumber && this.state.location && this.state.userName && this.state.password
-    if (this.state.location && this.state.distanceTravel && this.state.ageMinb && this.state.ageMax && this.state.description) {
+    if (this.state.location && this.state.distanceTravel && this.state.ageMin && this.state.ageMax && this.state.description) {
       API.saveGuest({
         location: this.state.location,
         distanceTravel: this.state.distanceTravel,
