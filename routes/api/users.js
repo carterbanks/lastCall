@@ -3,6 +3,8 @@ const router = express.Router();
 
 // User Model
 const User = require('../../models/User');
+const Host = require('../../models/Host');
+const Guest = require('../../models/Guest');
 
 // route get request to api/user
 // desc get all users
@@ -20,10 +22,17 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const newUser = new User({
-    name: req.body.name
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    location: req.body.location,
+    birthdate: req.body.birthdate,
+    email: req.body.email,
+    phoneNumber: req.body.phoneNumber,
+    userName: req.body.userName,
+    password: req.body.password
   });
 
-  newUser.save().then(user => res.json(user));
+  newUser.save().then(user => res.json(user)).catch(err => console.log(err));
 });
 
 // route DELETE request to api/user/:id

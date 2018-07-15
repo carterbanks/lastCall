@@ -8,7 +8,7 @@ const GuestSchema = new Schema({
     type: String,
     required: true
   },
-    distanceTravel: {
+  distanceTravel: {
     type: Number,
     required: true
   },
@@ -41,7 +41,7 @@ const GuestSchema = new Schema({
     default: false
   },
   description: {
-    type: Text,
+    type: String,
     required: true
   }
 

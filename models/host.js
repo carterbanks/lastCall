@@ -49,10 +49,10 @@ const HostSchema = new Schema({
     default: false
   },
   description: {
-    type: Text,
+    type: String,
     required: true
   }
 
 });
 
-module.exports = Host = mongoose.model('host', HostSchema);
+module.exports = Host = mongoose.model('hosts', HostSchema);
