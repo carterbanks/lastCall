@@ -17,3 +17,7 @@ img {
 .output{
     visibility: hidden;
 }
+.snap{
+    position: absolute;
+    top: 40px;
+}

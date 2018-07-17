@@ -9,10 +9,10 @@ export class FirstImpression extends Component {
         <div className="contentarea">
           <div className="camera">
             <video width={ window.innerWidth} height={window.innerHeight} id="video">Video stream not available.</video>
-            <button id="startbutton">Take photo</button>
+            <button className = "snap" id="startbutton">Take Your First Impression</button>
           </div>
         </div>
-        <div className="output">
+        <div style= "display: none;" className="output">
         <canvas id="canvas" />
           <img id="photo" alt="The screen capture will appear in this box." />
         </div>
