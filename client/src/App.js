@@ -20,8 +20,9 @@ import GroupSnap from "./components/Pages/JoinTheParty/GroupSnap/GroupSnap.js";
 export default () => (
   <BrowserRouter>
     <div>
-    <Navigation/>
+    
     <Wrapper>
+      <Navigation/>
     <Route exact path="/" component= {Home} />
     <Route path = "/login" component = {Login} />
     <Route path = "/logout" component = {Logout} />

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import './Home.css';
 
 export class Home extends Component {
   render() {
     return (
       <div>
-        <div class="section">
-          <div class="container-flex">
-            <div class="jumbotron jumbotron-fluid phone-screen">
+        <div className="section">
+          <div className="container-flex">
+            <div className="jumbotron jumbotron-fluid phone-screen">
             {/* NAV BAR */}
               {/* <div class="container-flex">
               <nav class="navbar navbar-light bg-light" className="lcNav">
@@ -32,49 +33,63 @@ export class Home extends Component {
               </nav>
               </div> */}
               {/* SPACE */}
-              <div class="container-flex" className="space">
+              <div className="container-flex space">
               </div>
               {/* SPACE */}
-              <div class="container-flex" className="space">
+              <div className="container-flex space">
               </div>
               {/* LOGO */}
-              <div class="container-flex">
+              <div className="container-flex">
               <img className="lcLogo" src="https://github.com/carterbanks/test-images/blob/master/lc-logo-placeholder.png?raw=true"/>
               </div>
               {/* SPACE */}
-              <div class="container-flex" className="space">
+              <div className="container-flex space">
               </div>
               {/* TITLE/TAGLING */}
-              <div class="container">
-                <h1 class="display-4" className="title-font">The Uber of</h1>
-                <h1 class="display-4" className="title-font">Partying</h1>
+              <div className="container">
+                <h1 className="display-4 title-font">The Uber of</h1>
+                <h1 className="display-4 title-font">Partying</h1>
               </div>
               {/* BUTTON: LOGIN */}
-              <div class="containter">
-              <button type="button" class="btn btn-primary btn-lg">Login</button>
+              <div className="container">
+              <button type="button" className="btn btn-primary btn-lg">
+              <Link
+                    to="/login"
+                    className={
+                      window.location.pathname === "/login"
+                    }
+                  >Login
+                      </Link></button>
               </div>
               {/* SPACE */}
-              <div class="container-flex" className="space">
+              <div className="container-flex space">
               </div>
               {/* BUTTON: SIGN UP */}
-              <div class="containter">
-              <button type="button" class="btn btn-primary btn-lg">Sign Up</button>
+              <div className="container">
+              <button type="button" className="btn btn-primary btn-lg">
+              <Link
+                    to="/signup"
+                    className={
+                      window.location.pathname === "/signup"
+                    }
+                  >Sign Up
+                      </Link></button>
               </div>
               {/* SPACE */}
-              <div class="container-flex" className="space">
+              <div className="container-flex space">
               </div>
               {/* SPACE */}
-              <div class="container-flex" className="space">
+              <div className="container-flex space">
               </div>
               {/* SPACE */}
-              <div class="container-flex" className="space">
+              <div className="container-flex space">
               </div>
               {/* SPACE */}
-              <div class="container-flex" className="space">
+              <div className="container-flex space">
               </div>
               {/* DISCLAIMER */}
-              <div class="container-flex">
-              <p class="lead" className="disclaimer">We do not post or share your information. By proceeding, you're confirming that you're 21+ and accept our terms of service.</p>
+              <div className="container-flex">
+              <p className="lead disclaimer">We do not post or share your information. By proceeding, you're confirming that you're 21+ and accept our terms of service.</p>
               </div>
               </div>
             </div>

@@ -40,7 +40,7 @@ export class Userinfo extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     // && this.state.lastName && this.state.email && this.state.phoneNumber && this.state.location && this.state.userName && this.state.password
-    if (this.state.firstName && this.state.lastName && this.state.email && this.state.birthdate && this.state.location && this.state.userName && this.state.password) {
+    if (this.state.firstName && this.state.lastName && this.state.email && this.state.birthdate && this.state.location && this.state.password) {
       API.saveUser({
         firstName: this.state.firstName,
         lastName: this.state.lastName,
@@ -100,7 +100,7 @@ render() {
       />
             <input type="text" aria-label="email address" placeholder="Email" onChange={this.handleInputChange} value={this.state.email} name="email" />
             <input type="text" aria-label="password" placeholder="Password" onChange={this.handleInputChange} value={this.state.password} name="password" />
-            <input className="btn btn-primary float-right" type="submit" value="Submit" disabled={!(this.state.firstName && this.state.lastName && this.state.email && this.state.birthdate && this.state.userName && this.state.password)}
+            <input className="btn btn-primary float-right" type="submit" value="Submit" disabled={!(this.state.firstName && this.state.lastName && this.state.email && this.state.birthdate && this.state.password)}
             onClick={this.handleFormSubmit} />
     </div>
 
