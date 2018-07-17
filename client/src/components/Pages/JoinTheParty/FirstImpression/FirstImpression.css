@@ -2,6 +2,8 @@
   width: 100%;
   margin: 0;
   padding: 0;
+  z-index: -99;
+  color: black;
 }
 video {
     width: 100%;
@@ -16,8 +18,11 @@ img {
 }
 .output{
     visibility: hidden;
+    display: none;
 }
 .snap{
-    position: absolute;
-    top: 40px;
+    position:absolute;
+    display: flex;
+    z-index:1000;
+
 }

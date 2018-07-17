@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./FirstImpression.css";
-import "./FirstImpressionPicture";
 
 export class FirstImpression extends Component {
   render() {
@@ -12,7 +11,7 @@ export class FirstImpression extends Component {
             <button className = "snap" id="startbutton">Take Your First Impression</button>
           </div>
         </div>
-        <div style= "display: none;" className="output">
+        <div className="output">
         <canvas id="canvas" />
           <img id="photo" alt="The screen capture will appear in this box." />
         </div>
@@ -28,7 +27,7 @@ export class FirstImpression extends Component {
       // calculated based on the aspect ratio of the input stream.
 
       var width; // We will scale the photo width to this
-      var height = 720; // This will be computed based on the input stream
+      var height; // This will be computed based on the input stream
 
       // |streaming| indicates whether or not we're currently streaming
       // video from the camera. Obviously, we start at false.
@@ -133,7 +132,7 @@ export class FirstImpression extends Component {
         if (width && height) {
           canvas.width = video.width;
           canvas.height = video.height;
-          context.drawImage(video, 0, 0, width, height);
+          context.drawImage(video, 0, 0, video.width, video.height);
 
           var data = canvas.toDataURL("image/png");
           photo.setAttribute("src", data);
