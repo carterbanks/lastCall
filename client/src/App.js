@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React from 'react';
 import './App.css';
 // import Birthdate from "./Components/Pages/Signup/Birthdate";
 import Home from "./components/Pages/Home/";
@@ -28,6 +28,8 @@ export default () => (
     <Route path = "/logout" component = {Logout} />
     <Route path = "/signup" component = {Signup} />
     <Route path = "/camera" component= {FirstImpression} />
+    <Route path = "/host-a-party" component= {Host} />
+    <Route path = "/go-to-a-party" component= {Guest} />
     </Wrapper>
     </div>
   </BrowserRouter>

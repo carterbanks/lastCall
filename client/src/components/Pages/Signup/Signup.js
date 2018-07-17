@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
 import './Signup.css';
 import { Userinfo } from './UserInfo/Userinfo';
 // import Userinfo from './UserInfo/';

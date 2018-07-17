@@ -46,7 +46,7 @@ export class Userinfo extends Component {
         lastName: this.state.lastName,
         email: this.state.email,
         birthdate: this.state.birthdate,
-        phoneNumber: this.state.email,
+        phoneNumber: this.state.phoneNumber,
         location: this.state.location,
         password: this.state.password
       })
