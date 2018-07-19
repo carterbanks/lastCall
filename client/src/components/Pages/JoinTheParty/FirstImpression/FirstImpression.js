@@ -7,8 +7,10 @@ export class FirstImpression extends Component {
       <div>
         <div className="contentarea">
           <div className="camera">
-            <video width={ window.innerWidth} height={window.innerHeight} id="video">Video stream not available.</video>
-            <button className = "snap" id="startbutton">Take Your First Impression</button>
+            <video width={ window.innerWidth} height={window.innerHeight} id="video" muted= "muted">Video stream not available.</video>
+          </div>
+          <div className = "snap">
+          <button id="startbutton">Take Your First Impression</button>
           </div>
         </div>
         <div className="output">
@@ -26,8 +28,8 @@ export class FirstImpression extends Component {
       // width to the value defined here, but the height will be
       // calculated based on the aspect ratio of the input stream.
 
-      var width; // We will scale the photo width to this
-      var height; // This will be computed based on the input stream
+      var width = window.innerWidth; // We will scale the photo width to this
+      var height = window.innerWidth; // This will be computed based on the input stream
 
       // |streaming| indicates whether or not we're currently streaming
       // video from the camera. Obviously, we start at false.
@@ -87,8 +89,8 @@ export class FirstImpression extends Component {
                 width = video.width;
               }
 
-              video.setAttribute("width", width);
-              video.setAttribute("height", height);
+              //video.setAttribute("width", width);
+             // video.setAttribute("height", height);
               canvas.setAttribute("width", width);
               canvas.setAttribute("height", height);
               streaming = true;

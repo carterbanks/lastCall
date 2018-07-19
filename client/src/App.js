@@ -14,7 +14,7 @@ import Btn from "./components/Btn.js";
 import Host from "./components/Pages/ChooseRole/Host/Host.js";
 import Matches from "./components/Pages/ChooseRole/Matches/Matches.js";
 import FirstImpression from "./components/Pages/JoinTheParty/FirstImpression/FirstImpression.js"; 
-import GroupSnap from "./components/Pages/JoinTheParty/GroupSnap/GroupSnap.js";
+//import GroupSnap from "./components/Pages/JoinTheParty/GroupSnap/GroupSnap.js";
 
 
 export default () => (
