@@ -1,32 +1,47 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom"; 
+import ReactDOM from "react-dom";
 import "./FirstImpression.css";
 
 export class FirstImpression extends Component {
-  render(){
+  render() {
     return (
       <div>
         <div className="contentarea">
           <div className="camera">
-            <video id= "video" ref={(stream) => { this.videoStream = stream }} muted = "muted"></video>
+            <video
+              id="video"
+              ref={stream => {
+                this.videoStream = stream;
+              }}
+              muted="muted"
+            />
           </div>
-          <div className = "snap">
-          <button type="button" className="btn btn-primary btn-lg" id="startbutton" style= {{width: "max-content"}}>Take Your First Impression</button>
+          <div className="snap">
+            <button
+              type="button"
+              className="btn btn-primary btn-lg"
+              id="startbutton"
+              style={{ width: "max-content" }}
+            >
+              Take Your First Impression
+            </button>
           </div>
         </div>
         <div className="output">
-        <canvas ref={(canvas) => { this.canvas = canvas }} id="canvas" />
+          <canvas
+            ref={canvas => {
+              this.canvas = canvas;
+            }}
+            id="canvas"
+          />
           <img id="photo" alt="The screen capture will appear in this box." />
         </div>
-        </div>
-      
+      </div>
     );
-};
+  }
 
   componentDidMount() {
- 
-
-    (function () {
+    (function() {
       // The width and height of the captured photo. We will set the
       // width to the value defined here, but the height will be
       // calculated based on the aspect ratio of the input stream.
@@ -81,6 +96,7 @@ export class FirstImpression extends Component {
         video.addEventListener(
           "canplay",
           function(ev) {
+            ev.preventDefault();
             if (!streaming) {
               height = video.videoHeight / (video.videoWidth / width);
 
@@ -93,10 +109,11 @@ export class FirstImpression extends Component {
               }
 
               //video.setAttribute("width", width);
-             // video.setAttribute("height", height);
-             //ReactDOM.render(<video width={ window.innerWidth} height={window.innerHeight} id="video" muted= "muted">Video stream not available.</video>, document.getElementById("video"));
+              // video.setAttribute("height", height);
+              //ReactDOM.render(<video width={ window.innerWidth} height={window.innerHeight} id="video" muted= "muted">Video stream not available.</video>, document.getElementById("video"));
               video.setAttribute("width", window.innerWidth);
               video.setAttribute("height", window.innerHeight);
+
               canvas.setAttribute("width", width);
               canvas.setAttribute("height", height);
               streaming = true;
@@ -153,10 +170,8 @@ export class FirstImpression extends Component {
 
       // Set up our event listener to run the startup process
       // once loading is complete.
-      window.addEventListener("load", startup, true);
-      
+      window.addEventListener("load" || "select", startup, false)
     })();
-
   }
 }
 export default FirstImpression;
