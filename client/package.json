@@ -15,6 +15,7 @@
     "react": "^16.4.1",
     "react-datepicker": "^1.5.0",
     "react-dom": "^16.4.1",
+    "react-geosuggest": "^2.8.0",
     "react-place": "^0.6.2",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",

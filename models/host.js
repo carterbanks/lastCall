@@ -8,48 +8,44 @@ const HostSchema = new Schema({
     type: String,
     required: true
   },
-    distanceView: {
-    type: Number,
-    required: true
-  },
-  ageMin: {
-    type: Number,
-    required: true
-  },
-  ageMax: {
-    type: Number,
-    unique: true
-  },
-  guestMin: {
-    type: Number,
-    required: true
-  },
-  guestMax: {
-    type: Number,
-    unique: true
-  },
-  smoking: {
+  smokingIn: {
     type: Boolean,
     default: false
   },
-  hasAlcohol: {
+  smokingOut: {
     type: Boolean,
     default: false
   },
-  hasFood: {
+  bringAlcohol: {
     type: Boolean,
     default: false
   },
-  hasMoney: {
+  bringFood: {
     type: Boolean,
     default: false
   },
-  hasDD: {
+  bringMoney: {
+    type: Boolean,
+    default: false
+  },
+  bringDD: {
     type: Boolean,
     default: false
   },
   description: {
     type: String,
+    required: true
+  },
+  guestAge: {
+    type: [Number, Number],
+    required: true
+  },
+  guestDistance: {
+    type: Number,
+    required: true
+  },
+  guestAmount: {
+    type: [Number, Number],
     required: true
   }
 

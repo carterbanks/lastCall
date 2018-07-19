@@ -4,23 +4,15 @@ const Schema = mongoose.Schema;
 //Schema
 
 const GuestSchema = new Schema({
-  location: {
+  guestLocation: {
     type: String,
     required: true
   },
-  distanceTravel: {
-    type: Number,
-    required: true
+  smokingIn: {
+    type: Boolean,
+    default: false
   },
-  ageMin: {
-    type: Number,
-    required: true
-  },
-  ageMax: {
-    type: Number,
-    unique: true
-  },
-  smoking: {
+  smokingOut: {
     type: Boolean,
     default: false
   },
@@ -42,6 +34,14 @@ const GuestSchema = new Schema({
   },
   description: {
     type: String,
+    required: true
+  },
+  partyAge: {
+    type: [Number],
+    required: true
+  },
+  partyDistance: {
+    type: [Number],
     required: true
   }
 
