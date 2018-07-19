@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const newHost = new Host({
-    location: req.body.location,
+    address: req.body.address,
     smokingIn: req.body.smokingIn,
     smokingOut: req.body.smokingOut,
     bringAlcohol: req.body.hasAlcohol,

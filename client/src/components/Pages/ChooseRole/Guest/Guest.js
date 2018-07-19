@@ -1,7 +1,8 @@
+/*global google*/
 import React, { Component } from 'react';
 import API from '../../../../utils/API';
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import Location from 'react-place';
+import Geosuggest from 'react-geosuggest';
 import Slider from 'rc-slider';
 import Tooltip from 'rc-tooltip';
 import 'rc-slider/assets/index.css';
@@ -40,6 +41,7 @@ export class Guest extends Component {
       partyAge: [21, 99],
       partyDistance: 1
     };
+    this.onSuggestSelect = this.onSuggestSelect.bind(this);
   }
 
   handleGuestFormSubmit = event => {
@@ -76,11 +78,16 @@ export class Guest extends Component {
     });
   };
 
-  onLocationSet(data) {
-    // data.description
-    // data.coords.lat
-    // data.coords.lng
-  };
+  /**
+   * When a suggest got selected
+   * @param  {Object} suggest The suggest
+   */
+  onSuggestSelect(suggest) {
+    console.log(suggest);
+    this.setState({
+      guestLocation: suggest.description
+    });
+  }
 
 
   render() {
@@ -98,24 +105,19 @@ export class Guest extends Component {
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label for="exampleEmail" sm={2}>Location</Label>
-            <Col sm={10}>
-            <Input type="text" name="guestLocation" value={this.state.guestLocation} onChange ={this.handleInputChange} placeholder="Dallas, TX, USA"/>
-            </Col>
-              {/* <Location
-                country='US'
-                noMatching='Sorry, I can not find {{value}}.'
-                onLocationSet={this.onLocationSet}
-                name="guestLocation"
-                value={this.state.guestLocation}
-                inputProps={{
-                  style: { color: '#0099FF' },
-                  className: 'location',
-                  placeholder: 'Where are you?'
-                }}
-              /> */}
-            
-          </FormGroup>
+        <Label for="location" sm={2}>Your current location</Label>
+        <Col sm={10}>
+        <Geosuggest
+          id="geoSuggest"
+          ref={el=>this._geoSuggest=el}
+          placeholder="Start typing!"
+          initialValue=""
+          country="us"
+          radius="20"
+          location={new google.maps.LatLng(53.558572, 9.9278215)}
+          onSuggestSelect={this.onSuggestSelect}/>
+          </Col>
+        </FormGroup>
 
           <FormGroup row>
             <Label for="exampleSelect" sm={2}>Distance willing to travel</Label>

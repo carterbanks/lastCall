@@ -1,8 +1,11 @@
+/*global google*/
 import React, { Component } from 'react';
 import API from '../../../../utils/API';
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import Slider from 'rc-slider';
 import Tooltip from 'rc-tooltip';
+import Geosuggest from 'react-geosuggest';
+
 import 'rc-slider/assets/index.css';
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
@@ -35,15 +38,16 @@ export class Host extends Component {
       bringFood: false,
       bringMoney: false,
       bringDD: false,
-      description: "This user did not add a description. Request an invitation at your own risk.",
+      description: "",
       guestAge: [21, 99],
       guestDistance: 1,
       guestAmount: [2, 40]
     };
     // this.handleDateChange = this.handleDateChange.bind(this);
+    this.onSuggestSelect = this.onSuggestSelect.bind(this);
   }
 
-  handleFormSubmit = event => {
+  handleHostFormSubmit = event => {
     event.preventDefault();
     // && this.state.lastName && this.state.email && this.state.phoneNumber && this.state.location && this.state.userName && this.state.password
     if (this.state.description) {
@@ -72,11 +76,16 @@ export class Host extends Component {
     });
   };
 
-  onLocationSet(data) {
-    // data.description
-    // data.coords.lat
-    // data.coords.lng
-  };
+  /**
+   * When a suggest got selected
+   * @param  {Object} suggest The suggest
+   */
+  onSuggestSelect(suggest) {
+    console.log(suggest);
+    this.setState({
+      address: suggest.description
+    });
+  }
 
 
   render() {
@@ -93,11 +102,19 @@ export class Host extends Component {
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label for="exampleEmail" sm={2}>Address<br />(private until guest accepted)</Label>
-            <Col sm={10}>
-              <Input type="address" name="address" id="exampleaddress" onChange={this.handleInputChange} value = {this.state.address} placeholder="1234 Party St. Boston, MA " />
-            </Col>
-          </FormGroup>
+        <Label for="location" sm={2}>Address</Label>
+        <Col sm={10}>
+        <Geosuggest
+          id="geoSuggest"
+          ref={el=>this._geoSuggest=el}
+          placeholder="Start typing!"
+          initialValue=""
+          country="us"
+          radius="20"
+          location={new google.maps.LatLng(53.558572, 9.9278215)}
+          onSuggestSelect={this.onSuggestSelect}/>
+          </Col>
+        </FormGroup>
 
           <FormGroup row>
             <Label for="exampleSelect" sm={2}>Distance Viewable</Label>
@@ -197,11 +214,11 @@ export class Host extends Component {
             <FormGroup row>
               <Label for="exampleText" sm={2}>Description</Label>
               <Col sm={10}>
-                <Input type="textarea" name="text" id="exampleText" placeholder="Remember to include important details, ground rules, and prerequisites for your party. Always be alert with people you don't know entering your place of residence." />
+                <Input type="textarea" name="description" id="exampleText" onChange={this.handleInputChange} value = {this.state.description} placeholder="Remember to include important details, ground rules, and prerequisites for your party. Always be alert with people you don't know entering your place of residence." />
               </Col>
             </FormGroup>
             <Col sm={{ size: 10, offset: 2 }}>
-              <Button>Submit</Button>
+              <Button onClick = {this.handleHostFormSubmit}>Submit</Button>
             </Col>
           </FormGroup>
         </Form>

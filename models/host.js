@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 //Schema
 
 const HostSchema = new Schema({
-  location: {
+  address: {
     type: String,
     required: true
   },

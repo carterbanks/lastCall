@@ -77,7 +77,7 @@ export class Userinfo extends Component {
   onSuggestSelect(suggest) {
     console.log(suggest);
     this.setState({
-      location: suggest.description
+      address: suggest.description
     });
   }
 
