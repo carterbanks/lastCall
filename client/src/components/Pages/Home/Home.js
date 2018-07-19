@@ -1,9 +1,63 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import API from '../../../utils/API';
+import { getFromStorage, setInStorage } from '../../../utils/storage';
+import { Route, Redirect } from 'react-router';
 import './Home.css';
 
 export class Home extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isLoading: true,
+      token: ''
+    };
+
+  }
+    // this.handleDateChange = this.handleDateChange.bind(this);
+    // this.onSuggestSelect = this.onSuggestSelect.bind(this);
+
+    componentDidMount() {
+      const token = getFromStorage('lastCall');
+      if(token) {
+        //Verify token
+        API.verifySignIn({token})
+        .then(res => res.json())
+        .then(json => {
+          if(json.success) {
+            this.setState({
+              token,
+              isLoading: false
+            });
+          } else {
+            this.setState({
+              isLoading: false
+            });
+          }
+        });
+      } else {
+        this.setState({
+          isLoading: false
+        });
+      }
+    };
+
+
   render() {
+
+    const {
+      isLoading,
+      token
+    } = this.state;
+
+    if(isLoading) {
+      return(<div><p>Loading...</p></div>);
+    } 
+    if(token) {
+<Redirect to="/dashboard"/>
+    }
+    if(!token) {
+
     return (
       <div>
         <div className="section">
@@ -52,28 +106,27 @@ export class Home extends Component {
               </div>
               {/* BUTTON: LOGIN */}
               <div className="container">
-              <button type="button" className="btn btn-primary btn-lg">
-              <Link
-                    to="/login"
+              <Link                     to="/login"
                     className={
                       window.location.pathname === "/login"
-                    }
-                  >Login
-                      </Link></button>
+                    }><button type="button" className="btn btn-primary btn-lg">
+            
+                  Login
+                      </button></Link>
               </div>
               {/* SPACE */}
               <div className="container-flex space">
               </div>
               {/* BUTTON: SIGN UP */}
               <div className="container">
-              <button type="button" className="btn btn-primary btn-lg">
               <Link
                     to="/signup"
                     className={
                       window.location.pathname === "/signup"
                     }
-                  >Sign Up
-                      </Link></button>
+                  ><button type="button" className="btn btn-primary btn-lg">
+Sign Up
+                      </button></Link>
               </div>
               {/* SPACE */}
               <div className="container-flex space">
@@ -97,7 +150,8 @@ export class Home extends Component {
         </div>
       
       
-    )
+    );
+  }
   }
 }
 

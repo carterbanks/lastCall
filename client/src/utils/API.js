@@ -1,6 +1,10 @@
 import axios from "axios";
 
 export default {
+  //Verifies user token for sign in
+  verifySignIn: function(token) {
+    return axios.get("/api/verify?token=" + token);
+  },
   // Saves a user to the database
   saveUser: function(userData) {
     return axios.post("/api/users", userData);

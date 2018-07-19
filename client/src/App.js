@@ -14,6 +14,7 @@ import Btn from "./components/Btn.js";
 import Host from "./components/Pages/ChooseRole/Host/Host.js";
 import Matches from "./components/Pages/ChooseRole/Matches/Matches.js";
 import FirstImpression from "./components/Pages/JoinTheParty/FirstImpression/FirstImpression.js"; 
+import ChooseRole from "./components/Pages/ChooseRole/ChooseRole.js";
 //import GroupSnap from "./components/Pages/JoinTheParty/GroupSnap/GroupSnap.js";
 
 
@@ -30,6 +31,7 @@ export default () => (
     <Route path = "/camera" component= {FirstImpression} />
     <Route path = "/host-a-party" component= {Host} />
     <Route path = "/go-to-a-party" component= {Guest} />
+    <Route path = "/choose-your-role" component= {ChooseRole} />
     </Wrapper>
     </div>
   </BrowserRouter>
