@@ -20,10 +20,10 @@ img {
     display: none;
 }
 .snap{
-    display: block;
     position: absolute;
     width: max-content;
+    display: block;
     bottom: 8%;
     margin: auto;
-
+    float: right;
 }

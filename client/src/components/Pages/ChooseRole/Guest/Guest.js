@@ -6,6 +6,7 @@ import Geosuggest from 'react-geosuggest';
 import Slider from 'rc-slider';
 import Tooltip from 'rc-tooltip';
 import 'rc-slider/assets/index.css';
+import { Link } from "react-router-dom";
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
@@ -99,9 +100,21 @@ export class Guest extends Component {
             <Label for="exampleFile" sm={2}>Who are you with?</Label>
             <Col sm={10}>
               <Input type="file" name="file" id="exampleFile" />
+              <FormText color="#cd4559">
+                or
+              </FormText>
               <FormText color="muted">
                 Snap a pic of your group!
               </FormText>
+              <button type="button">
+              <Link
+                    to="/camera"
+                    className={
+                      window.location.pathname === "/camera"
+                    }
+                    style= {{color: "black"}}
+                  >Take a First Impression
+                      </Link></button>
             </Col>
           </FormGroup>
           <FormGroup row>

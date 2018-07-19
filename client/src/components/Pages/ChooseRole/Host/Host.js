@@ -5,6 +5,7 @@ import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap
 import Slider from 'rc-slider';
 import Tooltip from 'rc-tooltip';
 import Geosuggest from 'react-geosuggest';
+import { Link } from "react-router-dom";
 
 import 'rc-slider/assets/index.css';
 
@@ -96,9 +97,21 @@ export class Host extends Component {
             <Label for="exampleFile" sm={2}>Who are you with?</Label>
             <Col sm={10}>
               <Input type="file" name="file" id="exampleFile" />
+              <FormText color="#cd4559">
+                or
+          </FormText>
               <FormText color="muted">
                 Snap a pic of your group!
           </FormText>
+              <button type="button">
+              <Link
+                    to="/camera"
+                    className={
+                      window.location.pathname === "/camera"
+                    }
+                    style= {{color: "black"}}
+                  >Take a First Impression
+                      </Link></button>
             </Col>
           </FormGroup>
           <FormGroup row>
