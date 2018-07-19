@@ -1,7 +1,8 @@
+/*global google*/
 import React, { Component } from 'react';
 import API from '../../../../utils/API';
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import Location from 'react-place';
+import Geosuggest from 'react-geosuggest';
 import Slider from 'rc-slider';
 import Tooltip from 'rc-tooltip';
 import 'rc-slider/assets/index.css';
@@ -29,37 +30,35 @@ export class Guest extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      location: "",
-      distanceTravel: 0,
-      ageMin: 0,
-      ageMax: 0,
-      smoking: false,
+      guestLocation: "",
+      smokingIn: false,
+      smokingOut: false,
       hasAlcohol: false,
       hasFood: false,
       hasMoney: false,
       hasDD: false,
-      description: "This user did not add a description. Accept request at your own risk.",
+      description: "",
       partyAge: [21, 99],
-      partyDistance: [1]
+      partyDistance: 1
     };
-    this.handleDateChange = this.handleDateChange.bind(this);
+    this.onSuggestSelect = this.onSuggestSelect.bind(this);
   }
 
-  handleFormSubmit = event => {
+  handleGuestFormSubmit = event => {
     event.preventDefault();
     // && this.state.lastName && this.state.email && this.state.phoneNumber && this.state.location && this.state.userName && this.state.password
-    if (this.state.location && this.state.distanceTravel && this.state.ageMin && this.state.ageMax && this.state.description) {
+    if (this.state.description) {
       API.saveGuest({
-        location: this.state.location,
-        distanceTravel: this.state.distanceTravel,
-        ageMin: this.state.ageMin,
-        ageMax: this.state.ageMax,
-        smoking: this.state.smoking,
+        guestLocation: this.state.guestLocation,
+        smokingIn: this.state.smokingIn,
+        smokingOut: this.state.smokingOut,
         hasAlcohol: this.state.hasAlcohol,
         hasFood: this.state.hasFood,
         hasMoney: this.state.hasMoney,
         hasDD: this.state.hasDD,
-        description: this.state.description
+        description: this.state.description,
+        partyAge: this.state.partyAge,
+        partyDistance: this.state.partyDistance
       })
         .then(res => console.log(res))
         .catch(err => console.log(err));
@@ -79,11 +78,16 @@ export class Guest extends Component {
     });
   };
 
-  onLocationSet(data) {
-    // data.description
-    // data.coords.lat
-    // data.coords.lng
-  };
+  /**
+   * When a suggest got selected
+   * @param  {Object} suggest The suggest
+   */
+  onSuggestSelect(suggest) {
+    console.log(suggest);
+    this.setState({
+      guestLocation: suggest.description
+    });
+  }
 
 
   render() {
@@ -97,26 +101,23 @@ export class Guest extends Component {
               <Input type="file" name="file" id="exampleFile" />
               <FormText color="muted">
                 Snap a pic of your group!
-</FormText>
+              </FormText>
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label for="exampleEmail" sm={2}>Location</Label>
-            <Col sm={10}>
-            <Location
-        country='US'
-        noMatching='Sorry, I can not find {{value}}.'
-        onLocationSet={this.onLocationSet}
-        name= "location"
-        value = {this.state.location}
-        inputProps={{
-          style: { color: '#0099FF' },
-          className: 'location',
-          placeholder: 'Where are you?'
-        }}
-      />
-            </Col>
-          </FormGroup>
+        <Label for="location" sm={2}>Your current location</Label>
+        <Col sm={10}>
+        <Geosuggest
+          id="geoSuggest"
+          ref={el=>this._geoSuggest=el}
+          placeholder="Start typing!"
+          initialValue=""
+          country="us"
+          radius="20"
+          location={new google.maps.LatLng(53.558572, 9.9278215)}
+          onSuggestSelect={this.onSuggestSelect}/>
+          </Col>
+        </FormGroup>
 
           <FormGroup row>
             <Label for="exampleSelect" sm={2}>Distance willing to travel</Label>
@@ -129,6 +130,7 @@ export class Guest extends Component {
                 onChange={partyDistance => this.setState({ partyDistance })}
                 trackStyle={{ backgroundColor: 'gray', height: 10 }}
                 railStyle={{ backgroundColor: 'red', height: 10 }}
+                value={this.state.partyDistance}
               />
               <span>{this.state.partyDistance} miles</span>
               <span style={{ float: "right" }}>100 miles</span>
@@ -144,7 +146,8 @@ export class Guest extends Component {
                 allowCross={false}
                 onChange={partyAge => this.setState({ partyAge })}
                 trackStyle={[{ backgroundColor: 'red', height: 10 }, { backgroundColor: "gray", height: 10 }]}
-                railStyle={{ backgroundColor: 'gray', height: 10 }} />
+                railStyle={{ backgroundColor: 'gray', height: 10 }}
+                value={[this.state.partyAge[0], this.state.partyAge[1]]} />
               <span>{this.state.partyAge[0]}</span>
               <span style={{ float: "right" }}>{this.state.partyAge[1]}</span>
             </Col>
@@ -154,13 +157,13 @@ export class Guest extends Component {
             <Col sm={{ size: 10 }}>
               <FormGroup check inline>
                 <Label check>
-                  <Input type="checkbox" /> Inside
-</Label>
+                  <Input type="checkbox" valid={true} value={this.state.smokingIn} /> Inside
+                </Label>
               </FormGroup>
               <FormGroup check inline>
                 <Label check>
-                  <Input type="checkbox" /> Outside
-</Label>
+                  <Input type="checkbox" valid={true} value={this.state.smokingOut} /> Outside
+                </Label>
               </FormGroup>
             </Col>
           </FormGroup>
@@ -169,36 +172,33 @@ export class Guest extends Component {
             <Col sm={{ size: 10 }}>
               <FormGroup check inline>
                 <Label check>
-                  <Input type="checkbox" /> Alcohol
-</Label>
+                  <Input type="checkbox" valid={true} value={this.state.hasAlcohol} /> Alcohol
+            </Label>
               </FormGroup>
               <FormGroup check inline>
                 <Label check>
-                  <Input type="checkbox" /> Food
-</Label>
+                  <Input type="checkbox" valid={true} value={this.state.hasFood} /> Food
+                </Label>
               </FormGroup>
               <FormGroup check inline>
                 <Label check>
-                  <Input type="checkbox" /> Money
-</Label>
+                  <Input type="checkbox" valid={true} value={this.state.hasMoney} /> Money
+                </Label>
               </FormGroup>
 
             </Col>
-
           </FormGroup>
           <FormGroup check row>
             <FormGroup row>
               <Label for="exampleText" sm={2}>Description</Label>
               <Col sm={10}>
-                <Input type="textarea" name="text" id="exampleText" placeholder="Remember to include important details, respect ground rules, obey local and federal laws, and overall, don't be a shitty person. Always be alert entering the place of residence of people you don't know." />
+                <Input type="textarea" name="description" id="exampleText" value={this.state.description} onChange={this.handleInputChange} placeholder="Remember to include important details, respect ground rules, obey local and federal laws, and overall, don't be a shitty person. Always be alert entering the place of residence of people you don't know." />
               </Col>
             </FormGroup>
             <Col sm={{ size: 10, offset: 2 }}>
-              <Button>Submit</Button>
+              <Button onClick={this.handleGuestFormSubmit}>Submit</Button>
             </Col>
-
           </FormGroup>
-
         </Form>
       </div>
     )

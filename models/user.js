@@ -8,7 +8,11 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-    lastName: {
+  lastName: {
+    type: String,
+    required: true
+  },
+  location: {
     type: String,
     required: true
   },

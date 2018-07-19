@@ -22,7 +22,7 @@ export default () => (
     <div>
     
     <Wrapper>
-      <Navigation/>
+    {/* <Navigation/> */}
     <Route exact path="/" component= {Home} />
     <Route path = "/login" component = {Login} />
     <Route path = "/logout" component = {Logout} />

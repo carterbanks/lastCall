@@ -20,19 +20,19 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const newGuest = new Guest({
-    location: req.body.location,
-    distanceTravel: req.body.distanceTravel,
-    ageMin: req.body.ageMin,
-    ageMax: req.body.ageMax,
-    smoking: req.body.smoking,
+    guestLocation: req.body.guestLocation,
+    smokingIn: req.body.smokingIn,
+    smokingOut: req.body.smokingIn,
     hasAlcohol: req.body.hasAlcohol,
     hasFood: req.body.hasFood,
     hasMoney: req.body.hasMoney,
     hasDD: req.body.hasDD,
-    description: req.body.description
+    description: req.body.description,
+    partyAge: req.body.partyAge,
+    partyDistance: req.body.partyDistance
   });
 
-  newGuest.save().then(guest => res.json(guest));
+  newGuest.save().then(guest => res.json(guest)).catch(err => console.log(err));
 });
 
 // route DELETE request to api/guest/:id

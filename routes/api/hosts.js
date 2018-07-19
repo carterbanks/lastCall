@@ -20,21 +20,20 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const newHost = new Host({
-    location: req.body.location,
-    distanceView: req.body.distanceView,
-    ageMin: req.body.ageMin,
-    ageMax: req.body.ageMax,
-    guestMin: req.body.guestMin,
-    guestMax: req.body.guestMax,
-    smoking: req.body.smoking,
-    hasAlcohol: req.body.hasAlcohol,
-    hasFood: req.body.hasFood,
-    hasMoney: req.body.hasMoney,
-    hasDD: req.body.hasDD,
-    description: req.body.description
+    address: req.body.address,
+    smokingIn: req.body.smokingIn,
+    smokingOut: req.body.smokingOut,
+    bringAlcohol: req.body.hasAlcohol,
+    bringFood: req.body.hasFood,
+    bringMoney: req.body.hasMoney,
+    bringDD: req.body.hasDD,
+    description: req.body.description,
+    guestAge: req.body.guestAge,
+    guestDistance: req.body.guestDistance,
+    guestAmount: req.body.guestAmount
   });
 
-  newHost.save().then(host => res.json(host));
+  newHost.save().then(host => res.json(host)).catch(err => console.log(err));
 });
 
 // route DELETE request to api/hosts/:id
