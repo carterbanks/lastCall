@@ -10,7 +10,7 @@ export class Home extends Component {
     super(props)
     this.state = {
       isLoading: true,
-      token: ''
+      token: ""
     };
 
   }
@@ -18,17 +18,21 @@ export class Home extends Component {
     // this.onSuggestSelect = this.onSuggestSelect.bind(this);
 
     componentDidMount() {
-      const token = getFromStorage('lastCall');
-      if(token) {
+      const obj = getFromStorage('lastCall');
+      console.log(obj);
+      if(obj && obj.token) {
         //Verify token
-        API.verifySignIn({token})
-        .then(res => res.json())
-        .then(json => {
-          if(json.success) {
+        const token  = obj.token;
+        console.log({token});
+        API.verifySignIn(token)
+        .then(json =>  {
+          if(json.data.success) {
+            console.log(token);
             this.setState({
-              token,
-              isLoading: false
+              token: token,
+              isLoading: false,
             });
+            console.log(this.state.token);
           } else {
             this.setState({
               isLoading: false
@@ -53,10 +57,9 @@ export class Home extends Component {
     if(isLoading) {
       return(<div><p>Loading...</p></div>);
     } 
-    if(token) {
-<Redirect to="/dashboard"/>
-    }
-    if(!token) {
+
+
+
 
     return (
       <div>
@@ -153,6 +156,6 @@ Sign Up
     );
   }
   }
-}
+
 
 export default Home;

@@ -1,6 +1,10 @@
 import axios from "axios";
 
 export default {
+  //Posts a login session
+  userLogin: function(loginData) {
+    return axios.post("/api/usersessions", loginData);
+  },
   //Verifies user token for sign in
   verifySignIn: function(token) {
     return axios.get("/api/verify?token=" + token);

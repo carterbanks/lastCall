@@ -8,7 +8,7 @@ import Logout from "./components/Pages/Logout";
 import Signup from "./components/Pages/Signup";
 import Navigation from "./components/Navigation";
 import Wrapper from "./components/Wrapper";
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import Guest from "./components/Pages/ChooseRole/Guest/Guest.js";
 import Btn from "./components/Btn.js";
 import Host from "./components/Pages/ChooseRole/Host/Host.js";
@@ -19,9 +19,9 @@ import ChooseRole from "./components/Pages/ChooseRole/ChooseRole.js";
 
 
 export default () => (
+  
   <BrowserRouter>
     <div>
-    
     <Wrapper>
     {/* <Navigation/> */}
     <Route exact path="/" component= {Home} />
