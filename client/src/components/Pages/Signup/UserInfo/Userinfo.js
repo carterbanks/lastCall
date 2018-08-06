@@ -43,7 +43,11 @@ export class Userinfo extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     // && this.state.lastName && this.state.email && this.state.phoneNumber && this.state.location && this.state.userName && this.state.password
-    if (this.state.firstName && this.state.lastName && this.state.email && this.state.birthdate && this.state.password) {
+    if (this.state.firstName
+      && this.state.lastName
+      && this.state.email
+      && this.state.birthdate
+      && this.state.password) {
       API.saveUser({
         firstName: this.state.firstName,
         lastName: this.state.lastName,
@@ -77,7 +81,7 @@ export class Userinfo extends Component {
   onSuggestSelect(suggest) {
     console.log(suggest);
     this.setState({
-      address: suggest.description
+      location: suggest.description
     });
   }
 

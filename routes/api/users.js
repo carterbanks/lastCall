@@ -13,7 +13,7 @@ const Guest = require('../../models/Guest');
 router.get('/', (req, res) => {
   User.find()
   .sort({ date: -1})
-    .then(users => res.json(users));
+    .then(users => res.json(users), console.log(users));
 });
 
 // route post request to api/user
@@ -21,17 +21,118 @@ router.get('/', (req, res) => {
 // access public
 
 router.post('/', (req, res) => {
-  const newUser = new User({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    location: req.body.location,
-    birthdate: req.body.birthdate,
-    email: req.body.email,
-    phoneNumber: req.body.phoneNumber,
-    password: req.body.password
-  });
+  const { body } = req;
+  const { 
+    firstName,
+    lastName,
+    location,
+    birthdate,
+    phoneNumber,
+    password
+  } = body;
+  let { email } = body;
+  
+  if(!firstName) {
+    return res.send({
+      success: false,
+      message: 'Error: First name cannot be blank'
+    });
+  } 
+  if(!lastName) {
+    return res.send({
+      success: false,
+      message: 'Error: Last name cannot be blank'
+    });
+  }
+  if(!location) {
+    return res.send({
+      success: false,
+      message: 'Error: Location cannot be blank'
+    });
+  }
+  if(!birthdate) {
+    return res.send({
+      success: false,
+      message: 'Error: Birthdate cannot be blank'
+    });
+  }
+  if(!phoneNumber) {
+    return res.send({
+      success: false,
+      message: 'Error: Phone number cannot be blank'
+    });
+  }
+  if(!email) {
+    return res.send({
+      success: false,
+      message: 'Error: Email cannot be blank'
+    });
+  }
 
-  newUser.save().then(user => res.json(user)).catch(err => console.log(err));
+  if(!password) {
+    return res.send({
+      success: false,
+      message: 'Error: Password cannot be blank'
+    });
+  }
+  
+  email = email.toLowerCase();
+
+    User.find({
+      email: email
+    }, (err, previousUsersEmail) => {
+      if(err) {
+        return res.send({
+          success: false,
+          message: 'Error: First Server error'
+        });
+      } else if (previousUsersEmail.length > 0) {
+        return res.send({
+          success: false,
+          message: 'Error: Account with this email address already exists'
+        });
+      }
+      User.find({
+        phoneNumber: phoneNumber
+      }, (err, previousUsersPhone) => {
+        if(err) {
+          return res.send({
+            success: false,
+            message: 'Error: First Server error'
+          });
+        } else if (previousUsersPhone.length > 0) {
+          return res.send({
+            success: false,
+            message: 'Error: Account with this phone number already exists'
+          });
+        }
+
+
+      //Saves new user
+      const newUser = new User();
+      newUser.email = email;
+      newUser.firstName = firstName;
+      newUser.lastName = lastName;
+      newUser.phoneNumber = phoneNumber;
+      newUser.location = location;
+      newUser.birthdate = birthdate;
+      newUser.password = newUser.generateHash(password);
+      newUser.save((err, user) => {
+        if(err) {
+          console.log(err);
+          return res.send({
+            success: false,
+            message: 'Error: Server error'
+          });
+        } 
+          return res.send({
+            success: true,
+            message: 'New user signed up!'
+          });
+      });
+      // .then(user => res.json(user)).catch(err => console.log(err));
+    });
+  });
 });
 
 // route DELETE request to api/user/:id

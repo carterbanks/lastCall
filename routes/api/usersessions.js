@@ -14,18 +14,18 @@ router.post('/', (req, res, next) => {
   const {
     password
   } = body;
-  let { 
+  let {
     email
-   } = body;
+  } = body;
 
-  if(!email) {
+  if (!email) {
     return res.send({
       success: false,
       message: "Email can't be blank"
     });
   }
 
-  if(!password) {
+  if (!password) {
     return res.send({
       success: false,
       message: "Password can't be blank"
@@ -41,14 +41,14 @@ router.post('/', (req, res, next) => {
         message: "Server error"
       });
     }
-    if (users.length != 1){
+    if (users.length != 1) {
       return res.send({
         success: false,
         message: "Invalid"
       });
     }
     const user = users[0];
-    if(user.password != password){
+    if (user.password != password) {
       return res.send({
         success: false,
         message: "Invalid password"
@@ -73,7 +73,7 @@ router.post('/', (req, res, next) => {
     });
     // .then(usersession => res.json(usersession)).catch(err => console.log(err));
   });
-    // .then(users => res.json(users));
+  // .then(users => res.json(users));
 
 });
 
@@ -82,4 +82,4 @@ router.get('/', (req, res, next) => {
 });
 
 
-module.exports=  router;
+module.exports = router;

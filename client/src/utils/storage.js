@@ -8,6 +8,7 @@ export function getFromStorage(key) {
       return JSON.parse(valueStr);
     } 
     return null;
+    console.log(key);
   } catch(err) {
     return null;
   }
@@ -19,6 +20,7 @@ export function setInStorage(key, obj) {
   }
   try {
     localStorage.setItem(key, JSON.stringify(obj));
+    console.log(key, obj);
   } catch(err) {
     console.log(err);
   }
