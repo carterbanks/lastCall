@@ -1,0 +1,25 @@
+.btn-primary {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    border-color: #cd4559;
+    background: #cd4559;
+    font-family: sans-serif;
+    margin-bottom: 10px;
+    border-radius: 50px;
+}
+
+label {
+    text-align: center;
+}
+
+#choose-role {
+    border-radius: 50px;
+}
+
+.first-name, .birthdate {
+    color: white;
+    text-align: center;
+    padding-top: 25vh;
+}

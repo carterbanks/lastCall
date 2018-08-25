@@ -10,17 +10,40 @@ const Guest = require('../../models/Guest');
 // desc get all users
 // access public
 
-router.get('/', (req, res) => {
-  User.find()
-  .sort({ date: -1})
-    .then(users => res.json(users), console.log(users));
+router.get('/:email', (req, res, next) => {
+
+  User.find({
+    email: req.params.email
+  })
+  // .sort({ date: -1})
+    .then(users => res.json(users));
+
+  // User.find({
+  //   email: req.params.email
+  // }, (err, previousUsersEmail) => {
+  //   if(err) {
+  //     return res.send({
+  //       success: false,
+  //       message: 'Error: First Server error'
+  //     });
+  //   } else if (previousUsersEmail.length > 0) {
+  //     return res.send({
+  //       success: true,
+  //       message: 'Account found'
+  //     });
+  //     // .then(user => res.json(user));
+  //   }
+  // })
+  // .sort({ date: -1})
+    // .then(user => res.json(user));
+    //          ^res.json(users), 
 });
 
 // route post request to api/user
 // desc create a user
 // access public
 
-router.post('/', (req, res) => {
+router.post('/:email', (req, res) => {
   const { body } = req;
   const { 
     firstName,

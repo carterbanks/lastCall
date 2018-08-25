@@ -15,7 +15,7 @@ router.get('/', (req, res, next) =>{
       isConnected: true
     }, {
       $set: {
-        isConnected:false
+        isConnected: false
       }
     }, null, (err, sessions) => {
       if (err) {
@@ -23,10 +23,17 @@ router.get('/', (req, res, next) =>{
           success: false,
           message: "Server error"
         });
-      }  else {
+      } 
+      //  if (sessions.length != 1) {
+      //   return res.send({
+      //     success: false,
+      //     message: "Invalid ID"
+      //   });
+      // }
+      else {
         return res.send({
           success: true,
-          message: "Success"
+          message: "Successful disconnect"
         });
       }
     });

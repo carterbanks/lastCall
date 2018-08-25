@@ -17,21 +17,24 @@ router.get('/', (req, res, next) => {
     if (err) {
       return res.send({
         success: false,
-        message: "Server error"
+        message: "Invalid ID length"
       });
     } 
-    if (sessions.length != 1) {
-      return res.send({
-        success: false,
-        message: "Invalid"
-      });
-    } else {
+    // if (sessions.length != 1) {
+    //   console.log(sessions.length);
+    //   return res.send({
+    //     success: false,
+    //     message: "Invalid ID"
+    //   });
+    // } 
+    else {
       return res.send({
         success: true,
         message: "Success"
       });
     }
   });
+  
 }); 
 
 module.exports=  router;

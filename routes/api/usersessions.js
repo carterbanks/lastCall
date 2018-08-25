@@ -48,7 +48,7 @@ router.post('/', (req, res, next) => {
       });
     }
     const user = users[0];
-    if (user.password != password) {
+    if (!user.validPassword(password)) {
       return res.send({
         success: false,
         message: "Invalid password"
@@ -57,12 +57,12 @@ router.post('/', (req, res, next) => {
 
     //Otherwise create user session
     const newUserSession = new UserSession();
-    newUserSession.userID = user._id;
+    newUserSession.userId = user._id;
     newUserSession.save((err, doc) => {
       if (err) {
         return res.send({
           success: false,
-          message: "Server error"
+          message: "Error: Server error"
         });
       }
       return res.send({

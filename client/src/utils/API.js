@@ -1,4 +1,5 @@
 import axios from "axios";
+import cors from 'cors';
 
 export default {
   //Posts a login session
@@ -9,6 +10,10 @@ export default {
   verifySignIn: function(token) {
     return axios.get("/api/verify?token=" + token);
   },
+  //Logs user out
+  userLogout: function(token) {
+    return axios.get("/api/logout?token=" + token);
+  },
   // Saves a user to the database
   saveUser: function(userData) {
     return axios.post("/api/users", userData);
@@ -18,8 +23,8 @@ export default {
     return axios.get("/api/users");
   },
   //Get specific user
-  getUser: function(id) {
-    return axios.get("/api/users/" + id);
+  getUser: function(email) {
+    return axios.get("/api/users/" + email);
   },
   //Saves a guest information to the database
   saveGuest: function(guestData) {
@@ -28,6 +33,7 @@ export default {
   //Gets guests from the DB
   getGuests: function() {
     return axios.get("/api/parties/guests");
+
   },
   //Deletes guests from the DB
   deleteGuest: function(id) {

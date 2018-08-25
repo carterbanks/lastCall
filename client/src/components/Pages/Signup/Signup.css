@@ -15,16 +15,10 @@ a {
     margin-right: auto;
     margin-top: 20px;
     /* width: 50%; */
-    width: 382px;
-    min-height: 800px;
+    width: 100%;
     background: #4d4c4c;
     }
     
-    .disclaimer {
-        color: #d5d9df;
-        font-family: 'Proxima Nova Soft';
-        text-align: center;
-    }
     
     .lcNav {
     background: #cd4559;

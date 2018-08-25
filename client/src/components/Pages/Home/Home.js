@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import API from '../../../utils/API';
 import { getFromStorage, setInStorage } from '../../../utils/storage';
-import { Route, Redirect } from 'react-router';
+import { withRouter } from "react-router-dom";
 import './Home.css';
+import ChooseRole from '../ChooseRole/ChooseRole';
 
 export class Home extends Component {
   constructor(props) {
@@ -14,37 +15,40 @@ export class Home extends Component {
     };
 
   }
-    // this.handleDateChange = this.handleDateChange.bind(this);
-    // this.onSuggestSelect = this.onSuggestSelect.bind(this);
+  // this.handleDateChange = this.handleDateChange.bind(this);
+  // this.onSuggestSelect = this.onSuggestSelect.bind(this);
 
-    componentDidMount() {
-      const obj = getFromStorage('lastCall');
-      console.log(obj);
-      if(obj && obj.token) {
-        //Verify token
-        const token  = obj.token;
-        console.log({token});
-        API.verifySignIn(token)
-        .then(json =>  {
-          if(json.data.success) {
-            console.log(token);
+  componentDidMount() {
+    const obj = getFromStorage('lastCall');
+    console.log(obj);
+    if (obj && obj.token) {
+      //Verify token
+      const token = obj.token;
+      console.log(token);
+      API.verifySignIn(token)
+        .then(res => res.data.success)
+        .then(res => {
+          //If there is a token
+          //Update state to token and halt loading
+          if (res) {
             this.setState({
               token: token,
-              isLoading: false,
+              isLoading: false
             });
-            console.log(this.state.token);
-          } else {
+
+          } else if (!res) {
             this.setState({
               isLoading: false
             });
           }
         });
-      } else {
-        this.setState({
-          isLoading: false
-        });
-      }
-    };
+    }
+    else {
+      this.setState({
+        isLoading: false
+      });
+    }
+  }
 
 
   render() {
@@ -54,108 +58,65 @@ export class Home extends Component {
       token
     } = this.state;
 
-    if(isLoading) {
-      return(<div><p>Loading...</p></div>);
-    } 
+    if (this.state.isLoading) {
+      console.log(isLoading);
+      return (<div><p>Loading...</p></div>);
+    }
 
+    if (this.state.token.length === 24) {
+      return(
+      <ChooseRole token={this.state.token}></ChooseRole>
+      )
+    }
 
+    if (!this.state.isLoading) {
+      console.log(token);
+      console.log(token.length);
+      return (
+        <div className="container-flex row">
+          <div className="jumbotron jumbotron-fluid phone-screen">
+            {/* LOGO */}
+            <div className="container-flex col-sm-12">
+              <img className="lcLogo" src="https://github.com/carterbanks/test-images/blob/master/lc-logo-placeholder.png?raw=true" />
+            </div>
+            {/* DISCLAIMER */}
+            <div className="container-flex col-sm-12">
+              <p className="lead-disclaimer">We do not post or share your information. By proceeding, you're confirming that you're 21+ and accept our terms of service.</p>
+            </div>
+            {/* TITLE/TAGLING */}
+            {/* <div className="container">
+                  <h1 className="display-4 title-font">The Uber of</h1>
+                  <h1 className="display-4 title-font">Partying</h1>
+                </div> */}
+            {/* BUTTON: LOGIN */}
+            <div className="container" className="login-signup-buttons col-sm-12">
+              <Link to="/login"
+                className={
+                  window.location.pathname === "/login"
+                }><button type="button" className="btn btn-primary btn-lg">
 
-
-    return (
-      <div>
-        <div className="section">
-          <div className="container-flex">
-            <div className="jumbotron jumbotron-fluid phone-screen">
-            {/* NAV BAR */}
-              {/* <div class="container-flex">
-              <nav class="navbar navbar-light bg-light" className="lcNav">
-                <ul class="nav nav-fill">
-                <li class="nav-item">
-                <a class="navbar-brand" href="#">
-                <img className="left-arrow" src="https://github.com/carterbanks/test-images/blob/master/left-arrow.png?raw=true"/>
-                </a>
-                </li>
-                <li class="nav-item">
-                <a class="navbar-brand" href="#"> */}
-                {/* <h2 className="home-button nav-title">Home</h2>  */}
-                {/* <img className="account-profile" src="https://github.com/carterbanks/test-images/blob/master/lc-account-img.png?raw=true"/>
-                </a>
-                </li>
-                <li class="nav-item">
-                <a class="navbar-brand" href="#">
-                <img className="message-bubble" src="https://github.com/carterbanks/test-images/blob/master/lc-message-img.png?raw=true"/>
-                </a>
-                </li>
-                </ul>
-              </nav>
-              </div> */}
-              {/* SPACE */}
-              <div className="container-flex space">
-              </div>
-              {/* SPACE */}
-              <div className="container-flex space">
-              </div>
-              {/* LOGO */}
-              <div className="container-flex">
-              <img className="lcLogo" src="https://github.com/carterbanks/test-images/blob/master/lc-logo-placeholder.png?raw=true"/>
-              </div>
-              {/* SPACE */}
-              <div className="container-flex space">
-              </div>
-              {/* TITLE/TAGLING */}
-              <div className="container">
-                <h1 className="display-4 title-font">The Uber of</h1>
-                <h1 className="display-4 title-font">Partying</h1>
-              </div>
-              {/* BUTTON: LOGIN */}
-              <div className="container">
-              <Link                     to="/login"
-                    className={
-                      window.location.pathname === "/login"
-                    }><button type="button" className="btn btn-primary btn-lg">
-            
                   Login
                       </button></Link>
-              </div>
-              {/* SPACE */}
-              <div className="container-flex space">
-              </div>
+
               {/* BUTTON: SIGN UP */}
-              <div className="container">
+
               <Link
-                    to="/signup"
-                    className={
-                      window.location.pathname === "/signup"
-                    }
-                  ><button type="button" className="btn btn-primary btn-lg">
-Sign Up
+                to="/signup"
+                className={
+                  window.location.pathname === "/signup"
+                }
+              ><button type="button" className="btn btn-primary btn-lg">
+                  Sign Up
                       </button></Link>
-              </div>
-              {/* SPACE */}
-              <div className="container-flex space">
-              </div>
-              {/* SPACE */}
-              <div className="container-flex space">
-              </div>
-              {/* SPACE */}
-              <div className="container-flex space">
-              </div>
-              {/* SPACE */}
-              <div className="container-flex space">
-              </div>
-              {/* DISCLAIMER */}
-              <div className="container-flex">
-              <p className="lead disclaimer">We do not post or share your information. By proceeding, you're confirming that you're 21+ and accept our terms of service.</p>
-              </div>
-              </div>
             </div>
           </div>
         </div>
-      
-      
-    );
-  }
-  }
 
 
-export default Home;
+      );
+    }
+  }
+}
+
+
+export default withRouter(Home);

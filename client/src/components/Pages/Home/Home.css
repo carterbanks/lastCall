@@ -14,10 +14,10 @@ a {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     /* width: 50%; */
     width: 382px;
-    min-height: 800px;
+    min-height: 100vh;
     background: #4d4c4c;
     }
     
@@ -41,8 +41,17 @@ a {
         font-family: 'Proxima Nova Soft';
         text-align: center;
     }
+    .lead-disclaimer {
+        color: #d5d9df;
+        font-family: 'Proxima Nova Soft';
+        text-align: center;
+        margin: auto;
+        margin-top: 3vh;
+        margin-bottom: 3vh;
+        font-size: 20px;
+    }
 
-    .space {
+    /* .space {
         display: flex;
         margin-left: auto;
         margin-right: auto;
@@ -50,7 +59,7 @@ a {
         margin-bottom: 0;
         width: auto;
         height: 20px;
-    }
+    } */
 
     .lcLogo {
         display: flex;
@@ -68,38 +77,37 @@ a {
         border-color: #cd4559;
         background: #cd4559;
         font-family: 'Proxima Nova Soft'; 
-
     }
-
-    .left-arrow {
+    .login-signup-buttons {
+        margin-top: 2vh;
+    }
+    /* .left-arrow {
         display: flex;
         margin-top: 30%;
         width: 25px;
         height: 100%;
-    }
-
+    } */
+/* 
     .account-profile {
         display: flex;
         margin-top: 20%;
         margin-left: 25px;
         width: 30px;
         height: 100%;
-    }
+    } */
 
-    .message-bubble {
+    /* .message-bubble {
         display: flex;
         margin-top: 30%;
         margin-left: 10px;
         width: 45px;
         height: 100%;
-    }
+    } */
 
-    .home-button {
+    /* .home-button {
         display: flex;
         margin-top: 15%;
-
-    }
-
+    } */
 
     #cuntainer {
         display: flex;
@@ -109,5 +117,12 @@ a {
 
     .nav-title {
         font-family: 'Proxima Nova Soft'
+    }
+
+    @media only screen and (max-width: 600px) {
+        .lcLogo {
+            margin-top: -5vh;
+        }
+        
     }
     

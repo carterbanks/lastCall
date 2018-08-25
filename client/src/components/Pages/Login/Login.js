@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
+//style
+import './Login.css';
 import { Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
+//API
 import API from '../../../utils/API';
+//storage 
 import { getFromStorage, setInStorage } from '../../../utils/storage';
+//routing
 import { Link } from "react-router-dom";
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import ChooseRole from '../ChooseRole/ChooseRole';
 
 
 export class Login extends Component {
-
+  //passing properties 
   constructor(props) {
     super(props)
     this.state = {
@@ -15,105 +22,158 @@ export class Login extends Component {
       isLoading: false,
       token: ""
     };
-
+    //bind functions for 'this' usage
+    this.onSignIn = this.onSignIn.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  componentDidMount() {
+  verfiyToken = () => {
     const obj = getFromStorage('lastCall');
+    //if there is a token 
     if (obj) {
-      //Verify token
-      fetch('/api/verify?token=' + obj)
-        .then(res => res.json())
-        .then(json => {
-
+      //verify token
+      API.verifySignIn(obj.token)
+        .then(res => {
+          if (res.data.success) {
+            console.log(obj.token);
+            console.log('Sucess');
+            this.setState({
+              isLoading: false,
+              token: obj.token
+            });
+          }
+          else {
+            console.log('No token detected');
+            this.setState({
+              isLoading: false
+            });
+          }
         });
+      //set state to loading to end loading animation
+      //set token to token from local storage
     }
     else {
+      //else set state to false to end loading animation
       this.setState({
         isLoading: false
       })
     }
   }
+  //when component mounts
+  componentDidMount() {
+    this.setState({
+      isLoading: true
+    });
+    console.log('Mounted');
+    //fetching token from local storage 
+    this.verfiyToken();
+  }
 
-  onSignIn() {
 
+  //click handler to verify login
+  onSignIn = e => {
+    //no refresh
+    e.preventDefault();
+
+    //set loading state true for animation
     this.setState({
       isLoading: true
     });
 
-    API.userLogin({
-      email: this.state.email,
-      password: this.state.password
-    })
-      .then(res => res)
-      .then(json => {
-        console.log('json ', json);
-        if (json.data.success) {
-          setInStorage('lastCall', { token: json.data.token });
-          console.log(json.data.token)
-          this.setState({
-            isLoading: false,
-            email: '',
-            password: '',
-            token: json.data.token
-          });
-          console.log(this.state.token);
+    console.log('Mounted');
+    //fetching token from local storage 
+    const obj = getFromStorage('lastCall');
+    //if there is a token 
+    if (obj) {
+      console.log
+      //verify token
+      API.userLogin({ email: this.state.email, password: this.state.password })
+        .then(res => {
+          if (res.data.success) {
+            setInStorage('lastCall', { token: res.data.token });
+            this.setState({
+              isLoading: false,
+              token: res.data.token
+            });
+          } else {
+            this.setState({
+              isLoading: false
+            });
+            console.log('Sign in error');
+          }
+        });
 
-        } else {
-          this.setState({
-            isLoading: false
-          });
-        }
-      }).catch(err => console.log(err));
+    }
+
+    else {
+      //set key in local storage and verify
+
+      //else set state to false to end loading animation
+      this.setState({
+        isLoading: false
+      })
+    }
 
   }
-
-  handleFormSubmit = event => {
-    this.onSignIn();
-  };
-
 
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
-  };
+  }
 
   render() {
-    return (
-      <div className="container">
-        <Form>
-          <FormGroup row>
-            <Label for="exampleEmail" sm={2}>Email
-          </Label>
-            <Col sm={10}>
-              <Input
-                type="email"
-                name="email"
-                id="exampleEmail"
-                placeholder="Email"
-                onChange={this.handleInputChange}
-              />
-            </Col>
-          </FormGroup>
 
-          <FormGroup row>
-            <Label for="examplePassword" sm={2}>Password</Label>
-            <Col sm={10}>
-              <Input
-                type="password"
-                name="password"
-                id="examplePassword"
-                placeholder="Password"
-                onChange={this.handleInputChange} 
-              />
-            </Col>
-          </FormGroup>
-          <Button onClick={this.handleFormSubmit}>Submit</Button>
-        </Form>
-      </div>
-    )
+
+    //if the state is loading (finding token)
+    //render loading screen
+    if (this.state.isLoading) {
+      console.log(this.state.isLoading);
+      return (<div><p>Loading...</p></div>);
+    }
+    //if there is a token in state, render choose your role
+    if (this.state.token.length == 24) {
+      return(
+        <ChooseRole email={this.state.email} token={this.state.token}></ChooseRole>
+      )
+    }
+    //if the state is done loading and there is no token
+    if (!this.state.isLoading) {
+      // console.log(this.state.token);
+      // console.log(this.state.token.length);
+      return (
+        <div className="container">
+            <img className="lc-logo-login" src="https://github.com/carterbanks/test-images/blob/master/lc-logo-placeholder.png?raw=true" />
+          <Form onSubmit={this.onSignIn}  id="login-form">
+            <FormGroup row>
+              <Col sm={12}>
+                <Input
+                  type="email"
+                  name="email"
+                  id="email-form"
+                  placeholder="Email"
+                  onChange={this.handleInputChange}
+                />
+              </Col>
+            </FormGroup>
+
+            <FormGroup row>
+              <Col sm={12}>
+                <Input
+                  type="password"
+                  name="password"
+                  id="password-form"
+                  placeholder="Password"
+                  onChange={this.handleInputChange}
+                />
+              </Col>
+            </FormGroup>
+            <Button id="login-button" type="submit"><h2>Login</h2></Button>
+          </Form>
+        </div>
+      )
+    }
   }
 }
 

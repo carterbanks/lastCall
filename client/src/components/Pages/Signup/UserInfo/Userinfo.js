@@ -11,7 +11,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 export class Userinfo extends Component {
 
-  
+
   constructor(props) {
     super(props)
     this.state = {
@@ -85,81 +85,81 @@ export class Userinfo extends Component {
     });
   }
 
-render() {
-  return (
-        <div className="container">
-          <Form>
-        <FormGroup row>
-        <Label for="firstName" sm={2}>First name</Label>
-        <Col sm={4}>
-        <Input type="text" name="firstName" placeholder="First name" onChange={this.handleInputChange} value={this.state.firstName}/>
-        </Col>
-        <Label for="lastName" sm={2}>Last name</Label>
-        <Col sm={4}>
-        <Input type="text" name="lastName" placeholder="Last name" onChange={this.handleInputChange} value={this.state.lastName}/>
-        </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Label for="examplephone" sm={2}>Phone number</Label>
-          <Col sm={10}>
-            <Input name="phoneNumber" id="phoneNumber" placeholder="Phone number" onChange={this.handleInputChange} value={this.state.phoneNumber}/>
-          </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Label for="exampleDate" sm={2}>Birthdate</Label>
-          <Col sm={10}>
-            <Input type="date" name="birthdate" id="exampleDate" placeholder="date placeholder" selected={this.state.birthdate}/>
-          </Col>
+  render() {
+    return (
+      <div className="container">
+        <Form>
+          <FormGroup row>
+            <Label for="firstName" sm={2}>First name</Label>
+            <Col sm={4}>
+              <Input type="text" name="firstName" placeholder="First name" onChange={this.handleInputChange} value={this.state.firstName} />
+            </Col>
+            <Label for="lastName" sm={2}>Last name</Label>
+            <Col sm={4}>
+              <Input type="text" name="lastName" placeholder="Last name" onChange={this.handleInputChange} value={this.state.lastName} />
+            </Col>
           </FormGroup>
-        <FormGroup row>
-        <Label for="location" sm={2}>Where are you?</Label>
-        <Col sm={10}>
-        <Geosuggest
-          id="geoSuggest"
-          ref={el=>this._geoSuggest=el}
-          placeholder="Start typing!"
-          initialValue=""
-          country="us"
-          radius="20"
-          location={new google.maps.LatLng(53.558572, 9.9278215)}
-          onSuggestSelect={this.onSuggestSelect}/>
-          </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Label for="exampleEmail" sm={2}>Email</Label>
-          <Col sm={10}>
-            <Input type="email" name="email" id="exampleEmail" placeholder="Email" onChange={this.handleInputChange} value={this.state.email}/>
-          </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Label for="examplePassword" sm={2}>Password</Label>
-          <Col sm={10}>
-            <Input type="password" name="password" id="examplePassword" placeholder="Password" onChange={this.handleInputChange} value={this.state.password}/>
-          </Col>
-        </FormGroup>
-        <Button disabled={!(this.state.firstName && this.state.lastName && this.state.email && this.state.birthdate && this.state.password)}
-            onClick={this.handleFormSubmit} >Submit</Button>
-            
-      </Form>
+          <FormGroup row>
+            <Label for="examplephone" sm={2}>Phone number</Label>
+            <Col sm={10}>
+              <Input name="phoneNumber" id="phoneNumber" placeholder="Phone number" onChange={this.handleInputChange} value={this.state.phoneNumber} />
+            </Col>
+          </FormGroup>
+          <FormGroup row>
+            <Label for="exampleDate" sm={2}>Birthdate</Label>
+            <Col sm={10}>
+              <Input type="date" name="birthdate" id="exampleDate" placeholder="date placeholder" selected={this.state.birthdate} />
+            </Col>
+          </FormGroup>
+          <FormGroup row>
+            <Label for="location" sm={2}>Where are you?</Label>
+            <Col sm={10}>
+              <Geosuggest
+                id="geoSuggest"
+                ref={el => this._geoSuggest = el}
+                placeholder="Start typing!"
+                initialValue=""
+                country="us"
+                radius="20"
+                location={new google.maps.LatLng(53.558572, 9.9278215)}
+                onSuggestSelect={this.onSuggestSelect} />
+            </Col>
+          </FormGroup>
+          <FormGroup row>
+            <Label for="exampleEmail" sm={2}>Email</Label>
+            <Col sm={10}>
+              <Input type="email" name="email" id="exampleEmail" placeholder="Email" onChange={this.handleInputChange} value={this.state.email} />
+            </Col>
+          </FormGroup>
+          <FormGroup row>
+            <Label for="examplePassword" sm={2}>Password</Label>
+            <Col sm={10}>
+              <Input type="password" name="password" id="examplePassword" placeholder="Password" onChange={this.handleInputChange} value={this.state.password} />
+            </Col>
+          </FormGroup>
+          <Button color ="primary" size = "lg" block sm ={12} disabled={!(this.state.firstName && this.state.lastName && this.state.email && this.state.birthdate && this.state.password)}
+            onClick={this.handleFormSubmit} >Sign Up</Button>
+
+        </Form>
       </div>
-    // <div className="container userinfo">
-    //   <input type="text" aria-label="First name" placeholder="First name" onChange={this.handleInputChange} value={this.state.firstName} name="firstName" />
-    //   <input type="text" aria-label="Last name" placeholder="Last name" onChange={this.handleInputChange} value={this.state.lastName} name="lastName" />
-    //   <DatePicker
-    //     onChange={this.handleDateChange}
-    //     selected={this.state.birthdate}
-    //     name="birthdate"
-    //   />
-    //   <input type="text" aria-label="phone number" placeholder="Phone number" onChange={this.handleInputChange} value={this.state.phoneNumber} name="phoneNumber" />
+      // <div className="container userinfo">
+      //   <input type="text" aria-label="First name" placeholder="First name" onChange={this.handleInputChange} value={this.state.firstName} name="firstName" />
+      //   <input type="text" aria-label="Last name" placeholder="Last name" onChange={this.handleInputChange} value={this.state.lastName} name="lastName" />
+      //   <DatePicker
+      //     onChange={this.handleDateChange}
+      //     selected={this.state.birthdate}
+      //     name="birthdate"
+      //   />
+      //   <input type="text" aria-label="phone number" placeholder="Phone number" onChange={this.handleInputChange} value={this.state.phoneNumber} name="phoneNumber" />
 
-    //         <input type="text" aria-label="email address" placeholder="Email" onChange={this.handleInputChange} value={this.state.email} name="email" />
-    //         <input type="text" aria-label="password" placeholder="Password" onChange={this.handleInputChange} value={this.state.password} name="password" />
-    //         <input className="btn btn-primary float-right" type="submit" value="Submit" disabled={!(this.state.firstName && this.state.lastName && this.state.email && this.state.birthdate && this.state.password)}
-    //         onClick={this.handleFormSubmit} />
-    // </div>
+      //         <input type="text" aria-label="email address" placeholder="Email" onChange={this.handleInputChange} value={this.state.email} name="email" />
+      //         <input type="text" aria-label="password" placeholder="Password" onChange={this.handleInputChange} value={this.state.password} name="password" />
+      //         <input className="btn btn-primary float-right" type="submit" value="Submit" disabled={!(this.state.firstName && this.state.lastName && this.state.email && this.state.birthdate && this.state.password)}
+      //         onClick={this.handleFormSubmit} />
+      // </div>
 
-  )
-}
+    )
+  }
 }
 
 export default Userinfo

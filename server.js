@@ -10,9 +10,11 @@ const verify = require('./routes/api/verify');
 const logout = require('./routes/api/logout');
 
 const app = express();
+const cors = require('cors');
 
 //Body-parser middle ware
 app.use(bodyParser.json());
+app.use(cors());
 
 // DB Config
 const db = require('./config/keys').mongoURI;
